@@ -18,3 +18,11 @@ Route::get('/', function () {
 });
 
 Route::post('/', 'ContactController@postInfo')->name('contact');
+
+Route::get('login', 'Admin\CustomerController@interfaceLogin');
+Route::post('login', 'Admin\CustomerController@loginCustomer');
+
+// Admin
+// Route::group(['prefix' => 'admin'], function () {
+//     Route::post('login', '\Admin\CustomerController@loginCustomer');
+// });

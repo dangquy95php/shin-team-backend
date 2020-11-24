@@ -170,7 +170,7 @@
 							Vui lòng liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi hoặc yêu cầu nào về dịch vụ,
 							 từ việc tạo trang web đến hỗ trợ học tập.</h2>
 				   </div>
-						
+				   @include('admin.components.alert') 
 				   <div class="c-box_right height_textarea">
 						@isset($result)
 							@if($result->error == true)
