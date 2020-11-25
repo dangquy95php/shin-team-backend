@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class Customer extends Authenticatable
+{
+    use Notifiable;
+
+    protected $table = 'customers';
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'password',
+        'name',
+        'address',
+        'email',
+        'role',
+        'created_at',
+        'upodated_at',
+    ];
+
+    const ROLE_ADMIN          = 1;
+    const ROLE_CUSTOMER       = 2;
+    const ROLE_ADMIN_NAME     = 'admin';
+    const ROLE_ADMIN_CUSTOMER = 'customer';
+
+    const ENABLE_CUSTOMER = 1;
+    const DISABLE_CUSTOMER = 0;
+
+    public static $CUSTOMER = [
+        self::ROLE_ADMIN => self::ROLE_ADMIN_NAME,
+        self::ROLE_CUSTOMER => self::ROLE_ADMIN_CUSTOMER,
+    ];
+
+    public static $STATUS = [
+        self::DISABLE_CUSTOMER => 'disable',
+        self::ENABLE_CUSTOMER => 'enable'
+    ];
+}
