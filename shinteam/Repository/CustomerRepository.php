@@ -15,6 +15,7 @@ class CustomerRepository extends AbstractEloquentRepository
     CONST ROLE_ADMIN       = 2;
 
     public $data = [];
+    public $type_toastr = 'success';
 
      /**
      * get model
@@ -46,5 +47,31 @@ class CustomerRepository extends AbstractEloquentRepository
 
             return false;
         }
+    }
+
+    public function listRepository()
+    {
+        return $this->all('name', 'email', 'address', 'id', 'role');
+    }
+
+    public function createRepository($request)
+    {
+        $data = [
+            'email'    => $request->input('email'),
+            'name'     => $request->input('name'),
+            'role'     => $request->input('role'),
+            'password' => bcrypt($request->input('password')),
+            'status'   => $request->input('status'),
+        ];
+        
+        try {
+            $this->data = $this->create($data);
+            $this->message = 'Created customer successfully!';
+        } catch(\Exception $e) {
+            $this->message = $e->getMessage();
+            $this->type_toastr = 'error';
+        }
+        
+        return $this;
     }
 }

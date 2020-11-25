@@ -25,7 +25,8 @@ class CreateCustomerRequest extends FormRequest
     {
         return [
             'email'                   => 'required|max:80|min:8',
-            'password'                => 'required|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|max:64|min:8|confirmed',
+            'address'                 => 'min:10|max:200',
+            'password'                => 'required|max:64|min:8|confirmed',
             'password_confirmation'   => 'required',
         ];
     }
@@ -33,15 +34,14 @@ class CreateCustomerRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.max'                        => 'Create_Customer_001',
-            'email.min'                        => 'Create_Customer_002',
-            'email.required'                   => 'Create_Customer_003',
-            'password.max'                     => 'Create_Customer_004',
-            'password.min'                     => 'Create_Customer_005',
-            'password.required'                => 'Create_Customer_006',
-            'password.regex'                   => 'Create_Customer_007',
-            'password_confirmation.required'   => 'Create_Customer_008',
-            'password.confirmed'               => 'Create_Customer_009',
+            'email.max'                        => 'Email cannot be larger than 80 characters',
+            'email.min'                        => 'Email must not be less than 8 characters',
+            'email.required'                   => 'Email is required',
+            'password.max'                     => 'Password cannot be larger than 80 characters',
+            'password.min'                     => 'Email must not be less than 8 characters',
+            'password.required'                => 'Password is required',
+            'password_confirmation.required'   => 'Passwords Comfirm is required',
+            'password.confirmed'               => 'Passwords do not match',
         ];
     }
 }

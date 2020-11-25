@@ -19,10 +19,16 @@ Route::get('/', function () {
 
 Route::post('/', 'ContactController@postInfo')->name('contact');
 
-Route::get('login', 'Admin\CustomerController@interfaceLogin');
+Route::get('login', 'Admin\CustomerController@loginForm');
 Route::post('login', 'Admin\CustomerController@loginCustomer');
 
 // Admin
-// Route::group(['prefix' => 'admin'], function () {
-//     Route::post('login', '\Admin\CustomerController@loginCustomer');
-// });
+Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/', 'DashboardController@dashboard')->name('dashboard');
+    
+    Route::group(['prefix' => 'customers'], function () {
+        Route::get('/', 'CustomerController@listCustomer')->name('admin_list_customer');
+        Route::get('add', 'CustomerController@addCustomer')->name('customer_add');
+        Route::post('add', 'CustomerController@addCustomerPost');
+    });
+});
