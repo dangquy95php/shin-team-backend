@@ -51,7 +51,7 @@ class CustomerRepository extends AbstractEloquentRepository
 
     public function listRepository()
     {
-        return $this->all('name', 'email', 'address', 'id', 'role');
+        return $this->all(['name', 'email', 'address', 'id', 'role', 'status']);
     }
 
     public function createRepository($request)

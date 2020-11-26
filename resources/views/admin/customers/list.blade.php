@@ -16,7 +16,6 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -29,67 +28,100 @@
     </section>
     <!-- /.content-header -->
   
-        <!-- Main content -->
+       <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
-              </div>
-              
-              <!-- /.card-header -->
-              <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                    <th>CSS grade</th>
-                    <th class="text-center">
-                        <a class="btn btn-primary" href="{{ route('customer_add') }}">Add</a>
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>U</td>
-                    <td>X</td>
-                  </tr>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                    <th>CSS grade</th>
-                    <th>CSS grade</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+
+<!-- Default box -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">List Users</h3>
+
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+        <i class="fas fa-minus"></i></button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+        <i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-striped projects">
+        <thead>
+            <tr>
+                <th style="width: 1%">
+                    STT
+                </th>
+                <th style="width: 20%">
+                    Name
+                </th>
+                <th style="width: 30%">
+                    Email
+                </th>
+                <th>
+                    Addess
+                </th>
+                <th>
+                    Role
+                </th>
+                <th style="width: 8%" class="text-center">
+                    Status
+                </th>
+                <th style="width: 20%" class="text-right">
+                  <a class="btn btn-primary" href="{{route('customer_add')}}">Add</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          @foreach($custonmers as $key => $custonmer)
+        <tr>
+          <td>
+              {{$key + 1}}
+          </td>
+          <td>
+              <a>
+              {{$custonmer->name}}
+              </a>
+          </td>
+          <td>
+          {{$custonmer->email}}
+          </td>
+          <td>
+            {{$custonmer->address}}
+          </td>
+          <td>
+          @foreach(App\Models\Customer::$CUSTOMER as $k => $cus)
+            {{($custonmer->role == $k) ? $cus : ''}}
+          @endforeach
+          </td>
+          <td class="project-state">
+            @foreach(App\Models\Customer::$STATUS as $k => $sta)
+              @if ($custonmer->status == $k)
+                <span class="badge badge-{{(boolean)$k == true ? 'success' : 'danger'}}">{{$sta}}</span>
+              @endif
+            @endforeach
+          </td>
+          <td class="project-actions text-right">
+              <a class="btn btn-info btn-sm" href="/admin/customer/{{$custonmer->id}}/edit">
+              <i class="fas fa-pencil-alt">
+              </i>
+              Edit
+              </a>
+              <a class="btn btn-danger btn-sm" href="/admin/customer/{{$custonmer->id}}/delete">
+              <i class="fas fa-trash">
+              </i>
+              Delete
+              </a>
+          </td>
+      </tr>
+      @endforeach
+        </tbody>
+    </table>
+  </div>
+  <!-- /.card-body -->
+</div>
+<!-- /.card -->
+
+</section>
+<!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   @jquery

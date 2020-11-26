@@ -7,7 +7,7 @@
     </head>
 <body>
     <div class="row mt-5">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="col-md-5 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
                 <h4 class="card-title text-center">LOGIN</h4>

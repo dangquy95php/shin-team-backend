@@ -27,18 +27,18 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="inputClientCompany">Name:</label>
-                                    <input type="text" name="name" id="inputClientCompany" class="form-control">
+                                    <input type="text" name="name"  value="{{old('name')}}"  id="inputClientCompany" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputClientCompany">Email:</label>
-                                    <input type="email" name="email" id="inputClientCompany" class="form-control">
+                                    <input type="email" name="email" value="{{old('email')}}"  id="inputClientCompany" class="form-control">
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="inputClientCompany">Addess:</label>
-                                    <input type="text" name="addess" id="inputClientCompany" class="form-control">
+                                    <input type="text" name="addess" value="{{old('addess')}}" id="inputClientCompany" class="form-control">
                                     @error('addess')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -61,7 +61,7 @@
                                     <label for="inputStatus">Roles:</label>
                                     <select name="role" class="form-control custom-select">
                                         @foreach(App\Models\Customer::$STATUS as $key => $status)
-                                            <option @if ($key == App\Models\Customer::ENABLE_CUSTOMER) {{ 'selected' }} @endif value="{{$key}}">{{ ucfirst($status)}}</option>
+                                            <option {{ (old('role') == $key) ? 'selected' : ''}} value="{{$key}}">{{ ucfirst($status)}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -69,7 +69,7 @@
                                     <label for="inputStatus">Status:</label>
                                     <select name="status" class="form-control custom-select">
                                             @foreach(App\Models\Customer::$CUSTOMER as $key => $customer)
-                                                <option @if ($key == App\Models\Customer::ROLE_CUSTOMER) {{ 'selected' }} @endif value="{{$key}}">{{ ucfirst($customer)}}</option>
+                                                <option {{ (old('status') == $key) ? 'selected' : ''}} value="{{$key}}">{{ ucfirst($customer)}}</option>
                                             @endforeach
                                     </select>
                                 </div>

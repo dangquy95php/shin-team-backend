@@ -41,7 +41,9 @@ class CustomerController
 
     public function listCustomer()
     {
-        return view('admin.customers.list');
+        $data = $this->customerRepository->listRepository();
+
+        return view('admin.customers.list', ['custonmers' => $data]);
     }
 
     public function addCustomer()
