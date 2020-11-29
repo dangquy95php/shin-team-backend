@@ -72,7 +72,7 @@ class CustomerController
     public function update($id)
     {
         $data = $this->customerRepository->updateRepository($id);
-    
+  
         return view('admin.customers.edit', compact('data'));
     }
 
