@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginCustomerRequest;
+use App\Http\Requests\UpdateCustomerRequest;
 use App\Http\Requests\CreateCustomerRequest;
 use ShinTeam\Repository\CustomerRepository;
 use Toastr;
@@ -76,7 +77,7 @@ class CustomerController
         return view('admin.customers.edit', compact('data'));
     }
 
-    public function updatePost($id, Request $request)
+    public function updatePost($id, UpdateCustomerRequest $request)
     {
         $data = $this->customerRepository->updatePostRepository($id, $request);
         $type = $data->type_toastr;

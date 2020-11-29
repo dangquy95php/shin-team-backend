@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCustomerRequest extends FormRequest
+class UpdateCustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,6 @@ class CreateCustomerRequest extends FormRequest
         return [
             'email'                   => 'required|max:80|min:8',
             'address'                 => 'min:10|max:200',
-            'password'                => 'required|max:64|min:8|confirmed',
-            'password_confirmation'   => 'required',
         ];
     }
 
@@ -37,13 +35,6 @@ class CreateCustomerRequest extends FormRequest
             'email.max'                        => 'Email cannot be larger than 80 characters',
             'email.min'                        => 'Email must not be less than 8 characters',
             'email.required'                   => 'Email is required',
-            'address.max'                      => 'Address cannot be larger than 200 characters',
-            'address.min'                      => 'Address must not be less than 10 characters',
-            'password.max'                     => 'Password cannot be larger than 80 characters',
-            'password.min'                     => 'Email must not be less than 8 characters',
-            'password.required'                => 'Password is required',
-            'password_confirmation.required'   => 'Passwords Comfirm is required',
-            'password.confirmed'               => 'Passwords do not match',
         ];
     }
 }

@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputClientCompany">Email:</label>
-                                    <input type="email" disabled name="email" value="{{old('email') ?? $data->email}}"  id="inputClientCompany" class="form-control">
+                                    <input type="email" readonly name="email" value="{{old('email') ?? $data->email}}"  id="inputClientCompany" class="form-control">
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="inputClientCompany">Addess:</label>
                                     <input type="text" name="address" value="{{old('address') ?? $data->address}}" id="inputClientCompany" class="form-control">
-                                    @error('addess')
+                                    @error('address')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

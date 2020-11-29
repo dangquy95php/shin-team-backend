@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="inputClientCompany">Addess:</label>
                                     <input type="text" name="address" value="{{old('address')}}" id="inputClientCompany" class="form-control">
-                                    @error('addess')
+                                    @error('address')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
