@@ -111,5 +111,10 @@ class CustomerRepository extends AbstractEloquentRepository
 
         return $this;
     }
+
+    public function searchRepository($request)
+    {
+        return Customer::search($request->input('search'))->select(['id', 'name', 'email', 'role', 'status', 'address'])->get();
+    }
 }
    

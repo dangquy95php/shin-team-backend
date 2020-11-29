@@ -81,7 +81,17 @@ class CustomerController
         $data = $this->customerRepository->updatePostRepository($id, $request);
         $type = $data->type_toastr;
         toastr()->$type($data->message);
+        if ($data->type_toastr == 'success') {
+            return redirect()->route('admin_list_customer');
+        }
 
         return redirect()->back()->withInput();
+    }
+
+    public function search(Request $request)
+    {
+        $data = $this->customerRepository->searchRepository($request);
+
+        return view('admin.customers.list', ['custonmers' => $data]);
     }
 }

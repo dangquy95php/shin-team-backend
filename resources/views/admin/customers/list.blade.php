@@ -28,7 +28,14 @@
   <div class="card-header">
     <h3 class="card-title">List Users</h3>
 
-    <div class="card-tools">
+    <div class="card-tools d-flex">
+      <div class="form-group mb-0 mr-4">
+          <form action="{{route('search_customer')}}" method="get" class="d-flex align-items-center">
+            <label for="inputClientCompany" class="m-0 pr-2">Search:</label>
+            <input type="text" name="search" value="{{ Request::get('search') ?: '' }}" class="form-control">
+            <button type="submit" class="btn btn-info ml-1">Submit</button>
+        </form>
+      </div>
       <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
         <i class="fas fa-minus"></i></button>
       <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">

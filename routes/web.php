@@ -33,6 +33,7 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admin', 'namespace
         Route::get('/{id}/edit', 'CustomerController@update')->where('id', '[0-9]+')->name('update_customer');
         Route::post('/{id}/edit', 'CustomerController@updatePost')->where('id', '[0-9]+')->name('update_customer');
         Route::get('/{id}/delete', 'CustomerController@delete')->where('id', '[0-9]+')->name('delete_customer');
+        Route::get('/search', 'CustomerController@search')->name('search_customer');
     });
 });
 

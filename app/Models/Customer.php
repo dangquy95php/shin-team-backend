@@ -85,4 +85,11 @@ class Customer extends Authenticatable
     {
         return $query->where('id', '<>', $id);
     }
+
+    public function scopeSearch($query, $searchTerm) {
+        return $query
+            ->where('email', 'like', "%" . $searchTerm . "%")
+            ->orWhere('name', 'like', "%" . $searchTerm . "%")
+            ->orWhere('address', 'like', "%" . $searchTerm . "%");
+    }
 }
