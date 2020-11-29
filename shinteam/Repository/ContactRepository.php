@@ -10,6 +10,7 @@ class ContactRepository extends AbstractEloquentRepository
 {
     public $data = [];
     public $error = false;
+    public $type_toastr = 'success';
         
     public function contactRepository($request)
     {
@@ -32,5 +33,47 @@ class ContactRepository extends AbstractEloquentRepository
     public function getModel()
     {
         return \App\Models\Contact::class;
+    }
+
+    public function listRepository()
+    {
+        return $this->all(['name', 'email', 'address', 'id', 'note']);
+    }
+
+    
+    public function updateRepository($id)
+    {
+        return $this->find($id, ['name', 'email', 'address', 'note']);
+    }
+
+    public function updatePostRepository($id, $request)
+    {
+        $data = $request->only('name', 'address', 'note');
+        try {
+            $this->message = 'Updated contact successfully!';
+            $contact = $this->update($id, $data);
+            if (!$contact->wasChanged()) {
+                $this->message = 'The contact may not change!';
+                $this->type_toastr = 'error';
+            }
+        } catch(\Exception $e) {
+            $this->message =  $e->getMessage();
+            $this->type_toastr = 'error';
+        }
+
+        return $this;
+    }
+
+    public function deleteRepository($id)
+    {
+        try {
+            $this->data = $this->delete($id);
+            $this->message = 'Deleted contact successfully!';
+        } catch (\Exception $e) {
+            $this->message =  $e->getMessage();
+            $this->type_toastr = 'error';
+        }
+    
+        return $this;
     }
 }

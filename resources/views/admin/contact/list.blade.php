@@ -30,7 +30,7 @@
 
     <div class="card-tools d-flex">
       <div class="form-group mb-0 mr-4">
-          <form action="{{route('search_customer')}}" method="get" class="d-flex align-items-center">
+          <form action="{{route('search_contact')}}" method="get" class="d-flex align-items-center">
             <label for="inputClientCompany" class="m-0 pr-2">Search:</label>
             <input type="text" name="search" value="{{ Request::get('search') ?: '' }}" class="form-control">
             <button type="submit" class="btn btn-info ml-1">Submit</button>
@@ -58,54 +58,42 @@
                 <th>
                     Addess
                 </th>
-                <th>
-                    Role
+                <th style="width: 30%" class="text-center">
+                    Note
                 </th>
-                <th style="width: 8%" class="text-center">
-                    Status
-                </th>
-                <th style="width: 20%" class="text-right">
-                  <a class="btn btn-primary" href="{{route('customer_add')}}">Add</a>
+                <th style="width: 20%" class="text-center">
+                  Action
                 </th>
             </tr>
         </thead>
         <tbody>
-          @foreach($custonmers as $key => $custonmer)
+          @foreach($contacts as $key => $contact)
         <tr>
           <td>
               {{$key + 1}}
           </td>
           <td>
               <a>
-              {{$custonmer->name}}
+              {{$contact->name}}
               </a>
           </td>
           <td>
-          {{$custonmer->email}}
+          {{$contact->email}}
           </td>
           <td>
-            {{$custonmer->address}}
+            {{$contact->address}}
           </td>
           <td>
-          @foreach(App\Models\Customer::$CUSTOMER as $k => $cus)
-            {{($custonmer->role == $k) ? $cus : ''}}
-          @endforeach
-          </td>
-          <td class="project-state">
-            @foreach(App\Models\Customer::$STATUS as $k => $sta)
-              @if ($custonmer->status == $k)
-                <span class="badge badge-{{(boolean)$k == true ? 'success' : 'danger'}}">{{$sta}}</span>
-              @endif
-            @endforeach
+            <textarea name="" id="" cols="30" class="form-control" rows="10">{{$contact->note}}</textarea>
           </td>
           <td class="project-actions text-right">
-              <a class="btn btn-info btn-sm" href="/admin/customers/{{$custonmer->id}}/edit">
+              <a class="btn btn-info btn-sm" href="/admin/contact/{{$contact->id}}/edit">
               <i class="fas fa-pencil-alt">
               </i>
               Edit
               </a>
               <!-- data-toggle="modal" data-target="#delete-customer" href="{{route('delete_customer', ['id' => 1]) }}" -->
-              <a href="#" class="btn btn-danger btn-sm" class="btn btn-danger" onclick="deleteCustomer({{$custonmer}})">
+              <a href="#" class="btn btn-danger btn-sm" class="btn btn-danger" onclick="deleteContact({{$contact}})">
               <i class="fas fa-trash">
               </i>
               Delete
@@ -120,11 +108,11 @@
 </div>
 <!-- /.card -->
 
-<div class="modal fade" id="delete-customer">
+<div class="modal fade" id="delete-contact">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title font-weight-bold">Delete Customer</h4>
+        <h4 class="modal-title font-weight-bold">Delete Contact</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -151,15 +139,15 @@
   
 @push('js')
   <script type="text/javascript">
-      function deleteCustomer(object) {
-        $('#delete-customer .modal-body').html(`
+      function deleteContact(object) {
+        $('#delete-contact .modal-body').html(`
           <p><span class="font-weight-bold">Name: </span>${object.name ?? 'null'}</p>
           <p><span class="font-weight-bold">Email: </span>${object.email}</p>
-          <p><span class="font-weight-bold">Address: </span>${object.addess ?? 'null'}</p>
+          <p><span class="font-weight-bold">Addess: </span>${object.addess ?? 'null'}</p>
         `);
-        $('#delete-customer').modal('show');
-        $('#delete-customer .btn-ok').click(function() {
-          window.location.href = `/quy.dev/admin/customers/${object.id}/delete`; 
+        $('#delete-contact').modal('show');
+        $('#delete-contact .btn-ok').click(function() {
+          window.location.href = `/admin/contact/${object.id}/delete`; 
         })
       }
   </script>

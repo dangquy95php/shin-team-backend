@@ -35,6 +35,17 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admin', 'namespace
         Route::get('/{id}/delete', 'CustomerController@delete')->where('id', '[0-9]+')->name('delete_customer');
         Route::get('/search', 'CustomerController@search')->name('search_customer');
     });
+
+    // Contact
+    Route::group(['prefix' => 'contact'], function () {
+        Route::get('/', 'ContactController@list')->name('admin_list_contact');
+        Route::get('add', 'ContactController@add')->name('contact_add');
+        Route::post('add', 'ContactController@addPost');
+        Route::get('/{id}/edit', 'ContactController@update')->where('id', '[0-9]+')->name('update_contact');
+        Route::post('/{id}/edit', 'ContactController@updatePost')->where('id', '[0-9]+')->name('update_contact');
+        Route::get('/{id}/delete', 'ContactController@delete')->where('id', '[0-9]+')->name('delete_contact');
+        Route::get('/search', 'ContactController@search')->name('search_contact');
+    });
 });
 
 //Clear Cache facade value:
