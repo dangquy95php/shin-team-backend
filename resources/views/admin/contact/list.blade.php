@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Contacts</li>
             </ol>
           </div>
         </div>
@@ -26,7 +26,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">List Users</h3>
+    <h3 class="card-title">List Contacts</h3>
 
     <div class="card-tools d-flex">
       <div class="form-group mb-0 mr-4">
