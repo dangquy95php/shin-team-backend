@@ -12,15 +12,20 @@ class ContactRepository extends AbstractEloquentRepository
     public $error = false;
     public $type_toastr = 'success';
         
-    public function contactRepository($request)
+    public function createRepository($request)
     {
         // "Thank you for contacting us! We will contact you shortly.";
+        $data = [
+            'email'         => $request->input('email'),
+            'name'          => $request->input('name'),
+            'note'          => $request->input('note'),
+            'address'       => $request->input('address'),
+        ];
         try {
-            $this->data = $this->create($request->only('email', 'name', 'note', 'address'));
+            $this->data = $this->create($data);
         } catch(\Exception $e) {
-            // 
-            $this->message = $e->getMessage();
-            $this->error = true;
+            $this->data['message'] = $e->getMessage();
+            $this->data['status_response'] =  JsonResponse::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS;
         }
 
         return $this;

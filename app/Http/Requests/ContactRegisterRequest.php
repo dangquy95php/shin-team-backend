@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\AbstractApiRequest;
 
-class ContactRegisterRequest extends FormRequest
+class ContactRegisterRequest extends AbstractApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,19 +26,19 @@ class ContactRegisterRequest extends FormRequest
     {
         return [
             'name'       => 'required|min:5|max:100',
-            'email'      => 'required|email|min:5|max:100',
+            'email'      => 'required|unique:contacts|email|min:5|max:100',
             'address'    => 'max:300',
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'name.required'                   => 'Your name is required',
-            'name.regex'                      => 'Your name is invalid',
-            'email.required'                  => 'Your email is required',
-            'email.email'                     => 'Your email is invalid',
-            'address.max'                     => 'Your address is too long',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required'                   => 'Your name is required',
+    //         'name.regex'                      => 'Your name is invalid',
+    //         'email.required'                  => 'Your email is required',
+    //         'email.email'                     => 'Your email is invalid',
+    //         'address.max'                     => 'Your address is too long',
+    //     ];
+    // }
 }
