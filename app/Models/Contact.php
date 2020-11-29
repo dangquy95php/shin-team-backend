@@ -22,4 +22,12 @@ class Contact extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function scopeSearch($query, $searchTerm) {
+        return $query
+            ->where('email', 'like', "%" . $searchTerm . "%")
+            ->orWhere('name', 'like', "%" . $searchTerm . "%")
+            ->orWhere('address', 'like', "%" . $searchTerm . "%")
+            ->orWhere('note', 'like', "%" . $searchTerm . "%");
+    }
 }

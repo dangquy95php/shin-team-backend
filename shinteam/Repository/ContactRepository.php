@@ -76,4 +76,9 @@ class ContactRepository extends AbstractEloquentRepository
     
         return $this;
     }
+
+    public function searchRepository($request)
+    {
+        return Contact::search($request->input('search'))->select(['id', 'name', 'email', 'address', 'note'])->get();
+    }
 }

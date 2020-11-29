@@ -57,4 +57,11 @@ class ContactController
 
         return redirect()->route('admin_list_contact');
     }
+
+    public function search(Request $request)
+    {
+        $data = $this->contactRepository->searchRepository($request);
+
+        return view('admin.contact.list', ['contacts' => $data]);
+    }
 }
