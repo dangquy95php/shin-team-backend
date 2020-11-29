@@ -41,8 +41,8 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/js/public_js_bootstrap-show-password.min.js') }}"></script>
     <script src="{{ asset('assets/js/public_js_jquery-3.5.1.js') }}"></script>
+    <script src="{{ asset('assets/js/public_js_bootstrap-show-password.min.js') }}"></script>
     <script src="{{ asset('assets/js/public_js_bootstrap.min.js') }}"></script>
     </body>
 </html>
