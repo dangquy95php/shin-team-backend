@@ -3,6 +3,7 @@
 namespace ShinTeam\Repository;
 
 use ShinTeam\Interfaces\interfaceRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 abstract class AbstractEloquentRepository implements interfaceRepository
 {
@@ -57,7 +58,14 @@ abstract class AbstractEloquentRepository implements interfaceRepository
      */
     public function find($id, $columns = '*')
     {
-        $result = $this->_model->find($id, $columns);
+        $result = $this->_model->findOrFail($id, $columns);
+
+        return $result;
+    }
+
+    public function save()
+    {
+        $result = $this->_model->save();
 
         return $result;
     }
@@ -82,12 +90,12 @@ abstract class AbstractEloquentRepository implements interfaceRepository
     {
         $result = $this->_model->find($id);
         if ($result) {
-            return $this->_model
-                        ->where($id)
-                        ->update($attributes);
+            $result->update($attributes);
+            
+            return $result;
         }
 
-        return null;
+        throw new ModelNotFoundException("Can't found by ID ". $id);
     }
 
     public function pagination($offset = 0, $limit = 10)
@@ -110,7 +118,7 @@ abstract class AbstractEloquentRepository implements interfaceRepository
             return true;
         }
 
-        return false;
+        throw new ModelNotFoundException("Can't found by ID ". $id);
     }
 
     /**

@@ -58,6 +58,7 @@ class CustomerRepository extends AbstractEloquentRepository
     {
         $data = [
             'email'    => $request->input('email'),
+            'address'  => $request->input('address'),
             'name'     => $request->input('name'),
             'role'     => $request->input('role'),
             'password' => bcrypt($request->input('password')),
@@ -74,4 +75,41 @@ class CustomerRepository extends AbstractEloquentRepository
         
         return $this;
     }
+
+    public function deleteRepository($id)
+    {
+        try {
+            $this->data = $this->delete($id);
+            $this->message = 'Deleted customer successfully!';
+        } catch (\Exception $e) {
+            $this->message =  $e->getMessage();
+            $this->type_toastr = 'error';
+        }
+    
+        return $this;
+    }
+
+    public function updateRepository($id)
+    {
+        return $this->find($id, ['name', 'email', 'address', 'status', 'role']);
+    }
+
+    public function updatePostRepository($id, $request)
+    {
+        $data = $request->only('name', 'address', 'status', 'role');
+        try {
+            $this->message = 'Updated customer successfully!';
+            $customer = $this->update($id, $data);
+            if (!$customer->wasChanged()) {
+                $this->message = 'The customer may not change!';
+                $this->type_toastr = 'error';
+            }
+        } catch(\Exception $e) {
+            $this->message =  $e->getMessage();
+            $this->type_toastr = 'error';
+        }
+
+        return $this;
+    }
 }
+   

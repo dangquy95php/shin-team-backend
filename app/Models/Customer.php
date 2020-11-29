@@ -55,4 +55,34 @@ class Customer extends Authenticatable
         self::DISABLE_CUSTOMER => 'disable',
         self::ENABLE_CUSTOMER => 'enable'
     ];
+
+    public function scopeGetId($query, $id)
+    {
+        return $query->where('id', $id);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::ACTIVE_CUSTOMER);
+    }
+
+    public function scopeFindEmail($query, $email)
+    {
+        return $query->where('email', $email);
+    }
+
+    public function scopeSortUpdate($query)
+    {
+        return $query->orderBy('alter_date', 'DESC');
+    }
+
+    public function scopeUpdatePassword($query, $attrubite)
+    {
+        return $query->update($attrubite);
+    }
+
+    public function scopeDifferentId($query, $id)
+    {
+        return $query->where('id', '<>', $id);
+    }
 }

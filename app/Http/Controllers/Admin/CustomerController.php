@@ -59,4 +59,29 @@ class CustomerController
 
         return redirect()->route('admin_list_customer');
     }
+
+    public function delete($id)
+    {
+        $data = $this->customerRepository->deleteRepository($id);
+        $type = $data->type_toastr;
+        toastr()->$type($data->message);
+
+        return redirect()->route('admin_list_customer');
+    }
+
+    public function update($id)
+    {
+        $data = $this->customerRepository->updateRepository($id);
+    
+        return view('admin.customers.edit', compact('data'));
+    }
+
+    public function updatePost($id, Request $request)
+    {
+        $data = $this->customerRepository->updatePostRepository($id, $request);
+        $type = $data->type_toastr;
+        toastr()->$type($data->message);
+
+        return redirect()->back()->withInput();
+    }
 }

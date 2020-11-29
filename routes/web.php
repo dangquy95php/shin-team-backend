@@ -30,5 +30,44 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admin', 'namespace
         Route::get('/', 'CustomerController@listCustomer')->name('admin_list_customer');
         Route::get('add', 'CustomerController@addCustomer')->name('customer_add');
         Route::post('add', 'CustomerController@addCustomerPost');
+        Route::get('/{id}/edit', 'CustomerController@update')->where('id', '[0-9]+')->name('update_customer');
+        Route::post('/{id}/edit', 'CustomerController@updatePost')->where('id', '[0-9]+')->name('update_customer');
+        Route::get('/{id}/delete', 'CustomerController@delete')->where('id', '[0-9]+')->name('delete_customer');
     });
+});
+
+//Clear Cache facade value:
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    return '<h1>Cache facade value cleared</h1>';
+});
+
+//Reoptimized class loader:
+Route::get('/optimize', function() {
+    $exitCode = Artisan::call('optimize');
+    return '<h1>Reoptimized class loader</h1>';
+});
+
+//Route cache:
+Route::get('/route-cache', function() {
+    $exitCode = Artisan::call('route:cache');
+    return '<h1>Routes cached</h1>';
+});
+
+//Clear Route cache:
+Route::get('/route-clear', function() {
+    $exitCode = Artisan::call('route:clear');
+    return '<h1>Route cache cleared</h1>';
+});
+
+//Clear View cache:
+Route::get('/view-clear', function() {
+    $exitCode = Artisan::call('view:clear');
+    return '<h1>View cache cleared</h1>';
+});
+
+//Clear Config cache:
+Route::get('/config-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return '<h1>Clear Config cleared</h1>';
 });

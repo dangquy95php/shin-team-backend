@@ -1,13 +1,5 @@
 @extends('admin.layouts.master')
 
-@push('css')
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-@endpush
-
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -100,12 +92,13 @@
             @endforeach
           </td>
           <td class="project-actions text-right">
-              <a class="btn btn-info btn-sm" href="/admin/customer/{{$custonmer->id}}/edit">
+              <a class="btn btn-info btn-sm" href="/admin/customers/{{$custonmer->id}}/edit">
               <i class="fas fa-pencil-alt">
               </i>
               Edit
               </a>
-              <a class="btn btn-danger btn-sm" href="/admin/customer/{{$custonmer->id}}/delete">
+              <!-- data-toggle="modal" data-target="#delete-customer" href="{{route('delete_customer', ['id' => 1]) }}" -->
+              <a href="#" class="btn btn-danger btn-sm" class="btn btn-danger" onclick="deleteCustomer({{$custonmer}})">
               <i class="fas fa-trash">
               </i>
               Delete
@@ -120,6 +113,26 @@
 </div>
 <!-- /.card -->
 
+<div class="modal fade" id="delete-customer">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title font-weight-bold">Delete Customer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer justify-content-end">
+        <button type="button" class="btn btn-danger btn-cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success btn-ok">Ok</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 </section>
 <!-- /.content -->
   </div>
@@ -128,31 +141,19 @@
   @toastr_js
   @toastr_render
   @endsection
-
+  
 @push('js')
-    <!-- DataTables -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- page script -->
-    <script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-        });
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-    </script>
+  <script type="text/javascript">
+      function deleteCustomer(object) {
+        $('#delete-customer .modal-body').html(`
+          <p><span class="font-weight-bold">Name: </span>${object.name ?? 'null'}</p>
+          <p><span class="font-weight-bold">Email: </span>${object.email}</p>
+          <p><span class="font-weight-bold">Email: </span>${object.addess ?? 'null'}</p>
+        `);
+        $('#delete-customer').modal('show');
+        $('#delete-customer .btn-ok').click(function() {
+          window.location.href = `/quy.dev/admin/customers/${object.id}/delete`; 
+        })
+      }
+  </script>
 @endpush
