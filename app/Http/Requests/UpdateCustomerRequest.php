@@ -25,7 +25,7 @@ class UpdateCustomerRequest extends FormRequest
     {
         return [
             'email'                   => 'required|max:80|min:8',
-            'address'                 => 'min:10|max:200',
+            'address'                 => 'max:200',
         ];
     }
 

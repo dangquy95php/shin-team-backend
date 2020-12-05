@@ -34,6 +34,7 @@ class Customer extends Authenticatable
         'address',
         'email',
         'role',
+        'status',
         'created_at',
         'upodated_at',
     ];
