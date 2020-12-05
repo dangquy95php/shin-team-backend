@@ -33,7 +33,7 @@ class CustomerRepository extends AbstractEloquentRepository
             'password' => $request->password,
             'role' => self::ROLE_CUSTOMER,
         ];
-        
+
         $remember = $request->input('remember', false);
         if ($isCustomer = Auth::attempt($login, $remember)) {
             return self::ROLE_CUSTOMER;

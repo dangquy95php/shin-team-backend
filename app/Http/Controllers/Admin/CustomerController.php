@@ -16,6 +16,12 @@ class CustomerController
 
     public function __construct(CustomerRepository $customerRepository)
     {
+        if(Auth::user() && Auth::user()->role == 1) {
+            return redirect('/');
+        } elseif(Auth::user() && Auth::user()->role == 2) {
+            return redirect('/admin');
+        }
+
         $this->customerRepository = $customerRepository;
     }
 

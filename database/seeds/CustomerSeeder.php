@@ -17,16 +17,22 @@ class CustomerSeeder extends Seeder
                 'email' => 'lxc150896@gmail.com',
                 'password' => bcrypt('12345'),
                 'name' => 'dangquy',
+                'role' => 1,
+                'status' => 1
             ],
             [
                 'email' => 'lxc@gmail.com',
                 'password' => bcrypt('12345'),
                 'name' => 'dangquy1',
+                'role' => 1,
+                'status' => 1
             ],
             [
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('12345'),
                 'name' => 'dangquy2',
+                'role' => 2,
+                'status' => 1
             ],
         ];
 
