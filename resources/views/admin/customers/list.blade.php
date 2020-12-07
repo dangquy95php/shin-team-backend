@@ -99,6 +99,7 @@
             @endforeach
           </td>
           <td class="project-actions text-right">
+            @if(\Auth::user()->id !== $custonmer->id)
               <a class="btn btn-info btn-sm" href="/admin/customers/{{$custonmer->id}}/edit">
               <i class="fas fa-pencil-alt">
               </i>
@@ -110,6 +111,7 @@
               </i>
               Delete
               </a>
+            @endif
           </td>
       </tr>
       @endforeach

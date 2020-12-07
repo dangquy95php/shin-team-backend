@@ -84,7 +84,7 @@
             {{$contact->address}}
           </td>
           <td>
-            <textarea name="" id="" cols="30" class="form-control" rows="10">{{$contact->note}}</textarea>
+            <textarea readonly name="" id="" cols="30" class="form-control" rows="10">{{$contact->note}}</textarea>
           </td>
           <td class="project-actions text-right">
               <a class="btn btn-info btn-sm" href="/admin/contact/{{$contact->id}}/edit">

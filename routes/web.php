@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/swaggers', 'SwaggerController@index');
 Route::post('/', 'ContactController@postInfo')->name('contact');
 
 Route::get('login', 'Admin\CustomerController@loginForm');

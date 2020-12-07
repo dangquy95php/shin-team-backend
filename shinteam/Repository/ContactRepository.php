@@ -25,7 +25,7 @@ class ContactRepository extends AbstractEloquentRepository
             $this->data = $this->create($data);
         } catch(\Exception $e) {
             $this->data['message'] = $e->getMessage();
-            $this->data['status_response'] =  JsonResponse::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS;
+            $this->data['status_response'] =  JsonResponse::HTTP_INTERNAL_SERVER_ERROR;
         }
 
         return $this;

@@ -91,7 +91,11 @@ class CustomerRepository extends AbstractEloquentRepository
 
     public function updateRepository($id)
     {
-        return $this->find($id, ['name', 'email', 'address', 'status', 'role']);
+        $data = $this->find($id, ['name', 'email', 'address', 'status', 'role']);
+        if ($data->email == Auth::user()->email)
+            abort(404);
+
+        return $data;
     }
 
     public function updatePostRepository($id, $request)
