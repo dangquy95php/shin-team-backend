@@ -1,0 +1,109 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Swagger ShinTeam
+schemes:
+  - https
+basePath: "/api"
+tags:
+- name: Contact
+  description: Everything about contact
+paths:
+  /contact/create:
+    post:
+      tags:
+      - Contact
+      summary: Add new contact
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Name that need to be added"
+        required: true
+        type: "string"
+      - name: "email"
+        in: "query"
+        description: "Email that need to be added"
+        required: true
+        type: "string"
+        format: email
+      - name: "address"
+        in: "query"
+        description: "Address that need to be added"
+        required: true
+        type: "string"
+      - name: "note"
+        in: "query"
+        description: "Note that need to be added"
+        nullable: true
+        type: "string"
+        schema:
+          $ref: "#/definitions/Contact"
+      responses:
+        201:
+          description: Create contact success
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: success
+              data:
+                $ref: "#/definitions/Contact"
+              api_name:
+                type: string
+                example: contactPost
+        422:
+          description: Create cotnact fail
+          schema:
+            type: object
+            properties:
+              name:
+                type: array
+                items:
+                  example: The name must be at least 5 characters.
+              email:
+                type: array
+                items:
+                  example: The email has already been taken.
+        500:
+          description: Create cotnact fail
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'SQLSTATE[HY000]: General error: 1364 Field "email" doesn"t have a default value (SQL: insert into `contacts` (`name`, `note`, `address`, `updated_at`, `created_at`) values (ASDAS, ?, adad, 2020-12-06 15:11:21, 2020-12-06 15:11:21))'
+              data:
+                type: array
+                items:
+                  exmaple: 
+              api_name:
+                type: string
+                example: contactPost
+definitions:
+  Contact:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      address:
+        type: "string"
+      email:
+        type: "string"
+      note:
+        type: "string"
+      created_at:
+        type: "string"
+        format: "date-time"
+      updated_at:
+        type: "string"
+        format: "date-time"
+    xml:
+      name: "Contact"
