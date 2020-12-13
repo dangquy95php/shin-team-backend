@@ -16,7 +16,7 @@ class CreateContactsTable extends Migration
         Schema::dropIfExists('contacts');
         Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('name', 100);
             $table->string('address', 100)->nullable();
             $table->text('note')->nullable();

@@ -5,6 +5,7 @@ namespace ShinTeam\Repository;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 use ShinTeam\Repository\AbstractEloquentRepository;
+use App\Jobs\SendEmail;
 
 class ContactRepository extends AbstractEloquentRepository
 {
@@ -26,6 +27,17 @@ class ContactRepository extends AbstractEloquentRepository
         } catch(\Exception $e) {
             $this->data['message'] = $e->getMessage();
             $this->data['status_response'] =  JsonResponse::HTTP_INTERNAL_SERVER_ERROR;
+        }
+        
+        if (!isset($this->data['status_response']))
+        {
+            $options = [
+                'title' => 'Comfirm email',
+                'to_email' => $request->input('email'),
+                'name' => 'Shin Team'
+            ];
+
+            SendEmail::dispatch($options, ['email' => $request->input('email')])->delay(now()->addSeconds(10));
         }
 
         return $this;
