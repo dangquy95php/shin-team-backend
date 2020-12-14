@@ -33,11 +33,10 @@ class ContactRepository extends AbstractEloquentRepository
             if (!isset($this->data['status_response']))
             {
                 $options = [
-                    'title' => 'Comfirm email',
+                    'title'    => 'Comfirm infor',
                     'to_email' => $request->input('email'),
-                    'name' => 'Shin Team'
+                    'name'     => $request->input('name'),
                 ];
-    
                 SendEmail::dispatch($options, ['email' => $request->input('email')])->delay(now()->addSeconds(10));
             }
         } catch(\Exception $e) {

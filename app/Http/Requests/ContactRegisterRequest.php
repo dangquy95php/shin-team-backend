@@ -26,7 +26,7 @@ class ContactRegisterRequest extends AbstractApiRequest
     {
         return [
             'name'       => 'required|min:5|max:100',
-            // 'email'      => 'required|unique:contacts|email|min:5|max:100',
+            'email'      => 'required|unique:contacts|email|min:5|max:100',
             'address'    => 'max:300',
         ];
     }
